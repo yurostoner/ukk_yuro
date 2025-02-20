@@ -1,0 +1,27 @@
+select * from produk where stok = 0
+
+
+Select sum(totalharga), pembayaran from penjualan where TanggalPenjualan = "2025-02-13" group by Pembayaran
+
+Select avg(totalharga), TanggalPenjualan from penjualan group by month (TanggalPenjualan)
+
+
+Select id_produk, count(id_produk) as total_terjual
+From detailpenjualan
+Where tanggal = "2025-02-12"
+Group by id_produk
+Order by total_terjual desc
+Limit 1;
+
+Select 
+
+Produk.nama_produk, produk.harga, produk.harga_awal,
+
+Sum(detailpenjualan.jumlah_produk),
+Sum((produk.harga - produk.harga_awal) * detailpenjualan.jumlah_produk) as total_keuntungan
+
+From detailpenjualan
+Join produk on detailpenjualan.id_produk = produk.id_produk
+Group by produk.nama_produk
+Order by total_keuntungan desc 
+Limit 1;
